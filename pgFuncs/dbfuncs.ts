@@ -148,7 +148,7 @@ export const getNextQuestion = async(userId: number)=>{
         const data = await db.query(`
         SELECT paskequestions.question_id, paskequestions.question
         FROM paskeuserquestionrelationship
-        JOIN paskequestions ON paskequestion.question_id = paskequestion.question_id
+        JOIN paskequestions ON paskeuserquestionrelationship.question_id = paskequestions.question_id
         WHERE paskeuserquestionrelationship.user_id = $1
         AND paskeuserquestionrelationship.complete = FALSE
         LIMIT 1
