@@ -26,17 +26,18 @@ This is an Express.js application for managing a quiz system. It allows users to
 To run the server locally:
 ```bash
 npm start
+```
 The server will start listening on port 3000 by default. You can change the port by modifying the port variable in index.js.
 
-API Endpoints
-GET /new_group
+## API Endpoints
 
+### GET /new_group
 Description: Creates a new group for the quiz.
 Request headers:
 username (string, required): Username to create the group.
-Response:
+## Response:
+
 Success (200 OK):
-```
 ```json
 {
   "success": {
@@ -45,9 +46,8 @@ Success (200 OK):
   }
 }
 ```
-```bash
+
 Error (404 Not Found):
-```
 ```json
 {
   "error": {
@@ -55,15 +55,17 @@ Error (404 Not Found):
   }
 }
 ```
-```bash
-GET /question
+
+### GET /question
 
 Description: Fetches the next question for the user.
 Request headers:
 api_key (string, required): API key for authentication.
-Response:
+
+
+### Response:
+
 Success (200 OK):
-```
 ```json
 {
   "success": {
@@ -73,9 +75,8 @@ Success (200 OK):
   }
 }
 ```
-```bash
+
 Error (401 Unauthorized):
-```
 ```json
 {
   "error": {
@@ -83,12 +84,49 @@ Error (401 Unauthorized):
   }
 }
 ```
-```bash
-POST /question
+
+### POST /question
 
 Description: Submits the answer to the current question.
 Request headers:
 api_key (string, required): API key for authentication.
+
 Request body:
-```
 ```json
+{
+  "answer": "<user_answer>"
+}
+```
+
+### Response:
+
+Success (200 OK):
+
+```json
+{
+  "success": {
+    "message": "Here comes the next question:",
+    "question_id": "<question_id>",
+    "question": "<question>"
+  }
+}
+```
+
+Error (401 Unauthorized):
+
+```json
+{
+  "error": {
+    "message": "Invalid Api Key."
+  }
+}
+```
+
+## Documentation
+API documentation is available at /doc. You can access it through your browser after starting the server.
+
+### Contributing
+Contributions are welcome! Feel free to open issues or pull requests.
+
+### License
+This project is licensed under the MIT License.
