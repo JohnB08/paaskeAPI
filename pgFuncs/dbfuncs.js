@@ -1,5 +1,4 @@
 import { db } from "../pg/db.js";
-import { questionList } from "../questionList.js";
 const createQuestionTable = async () => {
     try {
         const data = await db.query(`
@@ -99,19 +98,6 @@ export const createUserInDB = async (username, questionAmount = 9, excludedID = 
         return { success: false, error };
     }
 };
-const insertQuestions = async (object) => {
-    try {
-        const data = await db.query(`
-        INSERT INTO paskequestions ( question, answer )
-        VALUES ($1, $2)
-        RETURNING *
-        `, [object.question, object.answer]);
-        return { success: true, data };
-    }
-    catch (error) {
-        return { success: false, error };
-    }
-};
 export const getUserID = async (username) => {
     try {
         const data = await db.query(`
@@ -188,14 +174,6 @@ export const getNextQuestion = async (userId) => {
 export const initializeServer = async () => {
     const userTable = await createUserTable();
     const questionTable = await createQuestionTable();
-    const questionInsertionArray = [];
-    const existingQuestions = await getAllQuestions();
-    if (typeof existingQuestions === "number" && existingQuestions === 0) {
-        for (let question of questionList) {
-            const insertedQuestion = await insertQuestions(question);
-            questionInsertionArray.push(insertedQuestion);
-        }
-    }
     const userQuestionRel = await userQuestionRelation();
-    return [userTable, questionTable, questionInsertionArray, userQuestionRel];
+    return [userTable, questionTable, userQuestionRel];
 };
