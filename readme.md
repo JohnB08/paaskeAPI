@@ -11,7 +11,7 @@ This is an Express.js application for managing a quiz system. It allows users to
 - [License](#license)
 
 ## Installation
-1. Clone this repository to your local machine.
+1. Clone this repository to your local machine. <a href="https://github.com/JohnB08/paaskeAPI">Link to repository</a>
 2. Navigate to the project directory.
 3. Install dependencies using npm or yarn:
     ```bash
