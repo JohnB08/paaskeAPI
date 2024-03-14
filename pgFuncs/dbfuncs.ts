@@ -72,18 +72,6 @@ const insertUserQuestionRelationship = async(userID: number, questionId: number[
     }
 }
 
-const getAllQuestions = async()=>{
-    try{
-        const data = await db.query(`
-        SELECT question
-        FROM paskequestions
-        `)
-        return data.rows.length
-    } catch(error){
-        return error
-    }
-}
-
 
 
 export const createUserInDB = async(username: string, questionAmount: number = 9, excludedID: number[] = [22])=>{

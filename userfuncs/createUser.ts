@@ -25,6 +25,7 @@ const validateTokenPackage = (tokenPackage: string|jwt.JwtPayload): tokenPackage
 
 const tokenValidation = (usernameArray: string[], token: string, secret: string) =>{
     let validUsername = undefined
+    console.log(secret)
     for (let username of usernameArray){
         try{
             const decoded = jwt.verify(token, `${secret}/${username}`)
@@ -42,6 +43,7 @@ const tokenValidation = (usernameArray: string[], token: string, secret: string)
 
 export const validateUserToken = async(token:string)=>{
     const fetchedUsers = await getAllUsernames()
+    console.log(fetchedUsers.data)
     if (fetchedUsers.error){
         return {success: fetchedUsers.success, error: fetchedUsers.error}
     }

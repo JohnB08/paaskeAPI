@@ -68,18 +68,6 @@ const insertUserQuestionRelationship = async (userID, questionId) => {
         return { success: false, error };
     }
 };
-const getAllQuestions = async () => {
-    try {
-        const data = await db.query(`
-        SELECT question
-        FROM paskequestions
-        `);
-        return data.rows.length;
-    }
-    catch (error) {
-        return error;
-    }
-};
 export const createUserInDB = async (username, questionAmount = 9, excludedID = [22]) => {
     try {
         const data = await db.query(`
