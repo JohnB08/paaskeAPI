@@ -26,5 +26,32 @@ This is an Express.js application for managing a quiz system. It allows users to
 To run the server locally:
 ```bash
 npm start
+The server will start listening on port 3000 by default. You can change the port by modifying the port variable in index.js.
 
+API Endpoints
+GET /new_group
 
+Description: Creates a new group for the quiz.
+Request headers:
+username (string, required): Username to create the group.
+Response:
+Success (200 OK):
+```
+```json
+{
+  "success": {
+    "message": "Groupname saved, Quiz Initiated",
+    "api_key": "<api_key>"
+  }
+}
+```
+```bash
+Error (404 Not Found):
+```
+```json
+{
+  "error": {
+    "message": "Missing Groupname"
+  }
+}
+```
