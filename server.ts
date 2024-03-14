@@ -152,7 +152,7 @@ paskeApi.post("/question", async(req, res)=>{
     }
     const userID = fetchedUserID.data
     const {answer} = body
-    const checkAnswer = await getAnswer(userID, answer)
+    const checkAnswer = await getAnswer(userID, answer.toLowerCase())
     if (!checkAnswer.success || typeof checkAnswer.answer === "undefined"){
         return res.status(500).json({
             error: {

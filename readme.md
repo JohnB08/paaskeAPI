@@ -27,7 +27,17 @@ To run the server locally:
 ```bash
 npm start
 ```
-The server will start listening on port 3000 by default. You can change the port by modifying the port variable in index.js.
+The server will start listening on port 3000 by default. You can change the port by modifying the port variable in server.ts.
+This server requires a connection to a postgres database to function. 
+You need to include a .env file in the root folder with the following values:
+```bash
+POSTGRES_PASSWORD=<your database password>
+POSTGRES_USER=<your username>
+POSTGRES_DB=<your database name>
+POSTGRES_HOST=<the database host>
+POSTGRES_PORT=<the database port>
+JWT_SECRET=<secret key for jwt generation>
+```
 
 ## API Endpoints
 
