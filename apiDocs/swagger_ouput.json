@@ -5,7 +5,7 @@
     "title": "REST API",
     "description": ""
   },
-  "host": "https://paaskeapi.onrender.com:3000",
+  "host": "paaskeapi.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
