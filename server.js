@@ -5,6 +5,8 @@ import { validateBodyasObject, validateTokenAsString } from "./userfuncs/tokenVa
 import { getAnswer, getNextQuestion, getUserID, initializeServer } from "./pgFuncs/dbfuncs.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerFile from "./apiDocs/swagger_ouput.json" assert { type: "json" };
+import fs from "fs";
+import { marked } from "marked";
 const paskeApi = express();
 const port = 3000;
 paskeApi.use(express.json());
@@ -12,6 +14,22 @@ paskeApi.use(cors());
 paskeApi.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 const serverInit = await initializeServer();
 console.log(serverInit);
+paskeApi.get("/readme", (req, res) => {
+    const filepath = "./readme.md";
+    fs.readFile(filepath, "utf8", (err, data) => {
+        if (err) {
+            res.status(404).json({
+                error: {
+                    message: "File not Found"
+                }
+            });
+        }
+        else {
+            const html = marked(data.toString());
+            res.status(200).send(html);
+        }
+    });
+});
 paskeApi.get("/new_group", async (req, res) => {
     const username = req.headers.username;
     if (!username) {
