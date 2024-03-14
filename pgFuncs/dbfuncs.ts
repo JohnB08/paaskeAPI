@@ -39,7 +39,7 @@ const userQuestionRelation = async()=>{
     }
 }
 
-const getRandomQuestions = async(questionAmount: number = 10, excludedID:number[] = [])=>{
+const getRandomQuestions = async(questionAmount: number = 10, excludedID:number[] = [22])=>{
 
     try{
         const data = await db.query(`

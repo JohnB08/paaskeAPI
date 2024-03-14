@@ -37,7 +37,7 @@ const userQuestionRelation = async () => {
         return { success: false, error };
     }
 };
-const getRandomQuestions = async (questionAmount = 10, excludedID = []) => {
+const getRandomQuestions = async (questionAmount = 10, excludedID = [22]) => {
     try {
         const data = await db.query(`
         SELECT question_id
