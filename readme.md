@@ -55,3 +55,40 @@ Error (404 Not Found):
   }
 }
 ```
+```bash
+GET /question
+
+Description: Fetches the next question for the user.
+Request headers:
+api_key (string, required): API key for authentication.
+Response:
+Success (200 OK):
+```
+```json
+{
+  "success": {
+    "message": "Here comes the next question:",
+    "question_id": "<question_id>",
+    "question": "<question>"
+  }
+}
+```
+```bash
+Error (401 Unauthorized):
+```
+```json
+{
+  "error": {
+    "message": "Invalid Api Key."
+  }
+}
+```
+```bash
+POST /question
+
+Description: Submits the answer to the current question.
+Request headers:
+api_key (string, required): API key for authentication.
+Request body:
+```
+```json
