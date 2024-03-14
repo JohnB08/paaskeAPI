@@ -39,7 +39,7 @@ const userQuestionRelation = async()=>{
     }
 }
 
-const getRandomQuestions = async(questionAmount: number = 10, excludedID:number[] = [22])=>{
+const getRandomQuestions = async(questionAmount: number = 14, excludedID:number[] = [22])=>{
 
     try{
         const data = await db.query(`
@@ -74,7 +74,7 @@ const insertUserQuestionRelationship = async(userID: number, questionId: number[
 
 
 
-export const createUserInDB = async(username: string, questionAmount: number = 9, excludedID: number[] = [22])=>{
+export const createUserInDB = async(username: string, questionAmount: number = 14, excludedID: number[] = [22])=>{
     try{
         const data = await db.query(`
         INSERT INTO paskeusers (username)
