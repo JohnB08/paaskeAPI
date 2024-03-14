@@ -1,0 +1,161 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/new_group": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        },
+                        "api_key": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["message", "api_key"]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/question": {
+        "get": {
+          "description": "",
+          "parameters": [
+            {
+              "name": "api_key",
+              "in": "header",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "question": {
+                        "type": "string"
+                      },
+                      "question_id": {
+                        "type": "number"
+                      }
+                    },
+                    "required": ["question", "question_id"]
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        },
+      "post": {
+        "description": "Posts an Answer to a served question",
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "API key required for authentication"
+          },
+          {
+            "name": "dummy_request_body",
+            "in": "body",
+            "required": true,
+            "description": "Placeholder for the request body (Actual request body is in JSON format)",
+            "schema": {
+              "type": "object",
+              "properties":{
+                "answer": {
+                  "type":"string"
+                },
+                "questionId": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The request body should contain the question ID and the answer.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "questionId": {
+                    "type": "number"
+                  },
+                  "answer": {
+                    "type": "string"
+                  }
+                },
+                "required": ["questionId", "answer"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
