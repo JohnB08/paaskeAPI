@@ -1,0 +1,105 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Kodehode påskelAPIrinten 2024
+  description: "Welcome to this years påskelAPIrint, this is a quiz that follows the traditions of other påskelabyrinter, in that you will be served a selection of question. All of which have a hidden common denominator."
+servers:
+  - url: https://paaskeapi.onrender.com/
+paths:
+  /new_group:
+    get:
+      description: "Post your username, and recieve an api key, the api key also works as your timer."
+      parameters:
+        - name: username
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                      api_key:
+                        type: string
+                    required:
+                      - message
+                      - api_key
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /question:
+    get:
+      description: "Get the current question for your group"
+      parameters:
+        - name: api_key
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  question:
+                    type: string
+                  question_id:
+                    type: number
+                required:
+                  - question
+                  - question_id
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+    post:
+      description: Posts an Answer to a served question
+      parameters:
+              - name: api_key
+                in: header
+                schema:
+                  type: string
+              - name: content
+                in: body
+                schema:
+                  type: object
+                  properties:
+                    questionId:
+                        type: number
+                    answer:
+                        type: string
+      requestBody:
+        description: The request body should contain the question ID and the answer.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                questionId:
+                  type: number
+                answer:
+                  type: string
+              required:
+                - questionId
+                - answer
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error

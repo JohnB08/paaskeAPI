@@ -4,29 +4,45 @@ import { createNewUser, validateUserToken } from "./userfuncs/createUser.js";
 import { validateBodyasObject, validateTokenAsString } from "./userfuncs/tokenValidation.js";
 import { getAnswer, getNextQuestion, getUserID, initializeServer } from "./pgFuncs/dbfuncs.js";
 import swaggerUi from "swagger-ui-express";
-import swaggerFile from "./apiDocs/swagger_ouput.json" assert { type: "json" };
+import markdownit from "markdown-it";
+import hljs from "highlight.js";
 import fs from "fs";
-import { marked } from "marked";
+import yaml from "yamljs";
 const paskeApi = express();
 const port = 3000;
+const swaggerDock = yaml.load("./apiDocs/swagger.yaml");
 paskeApi.use(express.json());
 paskeApi.use(cors());
-paskeApi.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+paskeApi.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerDock));
 const serverInit = await initializeServer();
 console.log(serverInit);
+const md = markdownit({
+    highlight: function (str, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+            try {
+                return hljs.highlight(str, { language: lang }).value;
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+        return "";
+    },
+    html: true,
+});
 paskeApi.get("/readme", (req, res) => {
     const filepath = "./readme.md";
     fs.readFile(filepath, "utf8", (err, data) => {
         if (err) {
-            res.status(404).json({
+            return res.status(404).json({
                 error: {
-                    message: "File not Found"
+                    message: "Missing Readme"
                 }
             });
         }
         else {
-            const html = marked(data.toString());
-            res.status(200).send(html);
+            const html = md.render(data.toString());
+            return res.status(200).send(html);
         }
     });
 });
@@ -145,7 +161,7 @@ paskeApi.post("/question", async (req, res) => {
     }
     const userID = fetchedUserID.data;
     const { answer } = body;
-    const checkAnswer = await getAnswer(userID, answer);
+    const checkAnswer = await getAnswer(userID, answer.toLowerCase());
     if (!checkAnswer.success || typeof checkAnswer.answer === "undefined") {
         return res.status(500).json({
             error: {

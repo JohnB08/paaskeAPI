@@ -37,7 +37,7 @@ const userQuestionRelation = async () => {
         return { success: false, error };
     }
 };
-const getRandomQuestions = async (questionAmount = 10, excludedID = [22]) => {
+const getRandomQuestions = async (questionAmount = 14, excludedID = [22]) => {
     try {
         const data = await db.query(`
         SELECT question_id
@@ -68,7 +68,7 @@ const insertUserQuestionRelationship = async (userID, questionId) => {
         return { success: false, error };
     }
 };
-export const createUserInDB = async (username, questionAmount = 9, excludedID = [22]) => {
+export const createUserInDB = async (username, questionAmount = 14, excludedID = [22]) => {
     try {
         const data = await db.query(`
         INSERT INTO paskeusers (username)

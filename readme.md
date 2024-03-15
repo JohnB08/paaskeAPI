@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+
 # Paske API
 
 This is an Express.js application for managing a quiz system. It allows users to create groups, fetch questions, and submit answers.
@@ -104,7 +106,8 @@ api_key (string, required): API key for authentication.
 Request body:
 ```json
 {
-  "answer": "<user_answer>"
+  "answer": "<user_answer>",
+  "questionId": number
 }
 ```
 
@@ -140,3 +143,21 @@ Contributions are welcome! Feel free to open issues or pull requests.
 
 ### License
 This project is licensed under the MIT License.
+
+<style>
+  body{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    background-color: #F4F6F4;
+  }
+  .language-json, .language-bash{
+    display: inline-block;
+    background-color: #DDE3DD;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px; 
+    padding-bottom: 10px;
+    border-radius: 10px;
+  }
+</style>
