@@ -30,6 +30,9 @@ const md = markdownit({
     },
     html: true,
 });
+paskeApi.get("/", (req, res) => {
+    res.redirect("/readme");
+});
 paskeApi.get("/readme", (req, res) => {
     const filepath = "./readme.md";
     fs.readFile(filepath, "utf8", (err, data) => {
@@ -160,8 +163,8 @@ paskeApi.post("/question", async (req, res) => {
         });
     }
     const userID = fetchedUserID.data;
-    const { answer } = body;
-    const checkAnswer = await getAnswer(userID, answer.toLowerCase());
+    const { questionId, answer } = body;
+    const checkAnswer = await getAnswer(userID, answer.toLowerCase(), questionId);
     if (!checkAnswer.success || typeof checkAnswer.answer === "undefined") {
         return res.status(500).json({
             error: {

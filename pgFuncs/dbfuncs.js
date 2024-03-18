@@ -111,24 +111,24 @@ export const getAllUsernames = async () => {
         return { success: false, error };
     }
 };
-export const getAnswer = async (userID, answer) => {
+export const getAnswer = async (userID, answer, questionId) => {
     try {
         const data = await db.query(`
         SELECT question_id
         FROM paskequestions
         WHERE answer = $1
-        `, [answer]);
+        AND question_id = $2
+        `, [answer, questionId]);
         if (data.rows.length === 0) {
             return { success: true, answer: false };
         }
         else {
-            const questionID = data.rows[0].question_id;
             const setComplete = await db.query(`
             UPDATE paskeuserquestionrelationship
             SET complete = TRUE
             WHERE user_id = $1
             AND question_id = $2
-            `, [userID, questionID]);
+            `, [userID, questionId]);
             return { success: true, answer: true, data: setComplete };
         }
     }
