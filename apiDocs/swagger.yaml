@@ -70,15 +70,6 @@ paths:
                 in: header
                 schema:
                   type: string
-              - name: content
-                in: body
-                schema:
-                  type: object
-                  properties:
-                    questionId:
-                        type: number
-                    answer:
-                        type: string
       requestBody:
         description: The request body should contain the question ID and the answer.
         required: true
