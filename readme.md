@@ -37,12 +37,12 @@ Either connect it to a postgres image running locally, or a postgres database ho
 You need to include a .env file in the root folder with the following values:
 
 ```toml
-POSTGRES_PASSWORD=<your database password>
-POSTGRES_USER=<your username>
-POSTGRES_DB=<your database name>
-POSTGRES_HOST=<the database host>
-POSTGRES_PORT=<the database port>
-JWT_SECRET=<secret key for jwt generation>
+POSTGRES_PASSWORD="<your database password>"
+POSTGRES_USER="<your username>"
+POSTGRES_DB="<your database name>"
+POSTGRES_HOST="<the database host>"
+POSTGRES_PORT="<the database port>"
+JWT_SECRET="<secret key for jwt generation>"
 ```
 
 ## API Endpoints
@@ -111,7 +111,7 @@ Request body:
 ```json
 {
   "answer": "<user_answer>",
-  "questionId": number
+  "questionId": "<question_id>"
 }
 ```
 
