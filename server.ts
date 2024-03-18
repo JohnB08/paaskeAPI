@@ -34,10 +34,13 @@ const md = markdownit({
 
 })
 
+
+/* Redirects a "/" to the readme section */
 paskeApi.get("/", (req, res)=>{
     res.redirect("/readme")
 })
 
+/* Serves the readme.md file to the user. runs it through the markdown-it package first for highlighting and propper html conversion. */
 paskeApi.get("/readme", (req, res)=>{
     const filepath = "./readme.md"
     fs.readFile(filepath, "utf8", (err, data)=>{
@@ -54,7 +57,7 @@ paskeApi.get("/readme", (req, res)=>{
     })
 })
 
-
+/* Tries to post a new group to the postgres database */
 paskeApi.get("/new_group", async(req, res)=>{
     const username = req.headers.group_name as string
     if (!username){
@@ -80,6 +83,8 @@ paskeApi.get("/new_group", async(req, res)=>{
     })
 })
 
+
+/* /question serves the next unanswered question as response. requires api_key. */
 paskeApi.get("/question", async(req, res)=>{
     const token = req.headers.api_key
     const tokenExists = validateTokenAsString(token)
@@ -134,6 +139,7 @@ paskeApi.get("/question", async(req, res)=>{
     }
 })
 
+/* POST to /question checks the provided answer to the provided question_id and tries to either serve "wrong answer" or the next question. */
 paskeApi.post("/question", async(req, res)=>{
     const token = req.headers.api_key
     const body = req.body
@@ -217,7 +223,7 @@ paskeApi.post("/question", async(req, res)=>{
 })
 
 
-
+/* It listens on variable port. */
 paskeApi.listen(port, ()=>{
     console.log(`Listening on port: ${port}`)
 })
