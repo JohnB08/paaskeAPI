@@ -124,7 +124,7 @@ export const getAnswer = async(userID: number, answer: string, questionId: numbe
         const data = await db.query(`
         SELECT question_id
         FROM paskequestions
-        WHERE answer = $1
+        WHERE POSITION( $1 IN answer )>0
         AND question_id = $2
         `, [answer, questionId])
         if (data.rows.length === 0){

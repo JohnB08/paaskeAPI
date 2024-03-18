@@ -50,7 +50,7 @@ paskeApi.get("/readme", (req, res) => {
     });
 });
 paskeApi.get("/new_group", async (req, res) => {
-    const username = req.headers.username;
+    const username = req.headers.group_name;
     if (!username) {
         return res.status(404).json({
             error: {
@@ -68,7 +68,7 @@ paskeApi.get("/new_group", async (req, res) => {
     }
     return res.status(200).json({
         success: {
-            message: "Groupname saved, Quiz Initiated",
+            message: "Groupname saved, Quiz Initiated, Good luck!",
             api_key: postUser.data
         }
     });
