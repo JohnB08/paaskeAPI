@@ -54,7 +54,7 @@ paths:
                 properties:
                   success: 
                   type: object
-                  schema: 
+                  properties:
                     question:
                       type: string
                     question_id:
@@ -83,7 +83,7 @@ paths:
               properties:
                 success:
                 type: object
-                scema:
+                properties:
                   questionId:
                     type: number
                   answer:
