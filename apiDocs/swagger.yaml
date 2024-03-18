@@ -52,13 +52,16 @@ paths:
               schema:
                 type: object
                 properties:
-                  question:
-                    type: string
-                  question_id:
-                    type: number
-                required:
-                  - question
-                  - question_id
+                  success: 
+                  type: object
+                  schema: 
+                    question:
+                      type: string
+                    question_id:
+                      type: number
+                  required:
+                    - question
+                    - question_id
         '401':
           description: Unauthorized
         '500':
@@ -78,13 +81,16 @@ paths:
             schema:
               type: object
               properties:
-                questionId:
-                  type: number
-                answer:
-                  type: string
-              required:
-                - questionId
-                - answer
+                success:
+                type: object
+                scema:
+                  questionId:
+                    type: number
+                  answer:
+                    type: string
+                required:
+                  - questionId
+                  - answer
       responses:
         '200':
           description: OK
