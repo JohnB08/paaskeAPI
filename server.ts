@@ -45,7 +45,7 @@ paskeApi.get("/readme", (req, res)=>{
     const filepath = "./readme.md"
     fs.readFile(filepath, "utf8", (err, data)=>{
         if (err){
-            return res.status(404).json({
+            return res.status(400).json({
                 error: {
                     message: "Missing Readme"
                 }
@@ -145,7 +145,7 @@ paskeApi.post("/question", async(req, res)=>{
     const body = req.body
     const bodyExists = validateBodyasObject(body)
     if (!bodyExists){
-        return res.status(404).json({
+        return res.status(400).json({
             error: {
                 message: "Missing answer and/or questionID"
             }
@@ -172,7 +172,8 @@ paskeApi.post("/question", async(req, res)=>{
     if (!fetchedUserID.success || typeof fetchedUserID.data === "undefined"){
         return res.status(500).json({
             error: {
-                message: "internal server error"
+                message: "internal server error",
+                error: fetchedUserID.error
             }
         })
     }
@@ -182,7 +183,8 @@ paskeApi.post("/question", async(req, res)=>{
     if (!checkAnswer.success || typeof checkAnswer.answer === "undefined"){
         return res.status(500).json({
             error: {
-                message: "internal server error"
+                message: "internal server error",
+                error: checkAnswer.error
             }
         })
     } 
