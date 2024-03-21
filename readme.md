@@ -63,7 +63,7 @@ Success (200 OK):
 }
 ```
 
-Error (404 Not Found):
+Error (400 Bad Request):
 ```json
 {
   "error": {
