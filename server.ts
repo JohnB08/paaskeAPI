@@ -14,7 +14,9 @@ const port = 3000
 const swaggerDock = yaml.load("./apiDocs/swagger.yaml")
 paskeApi.use(express.json());
 paskeApi.use(cors());
-paskeApi.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerDock))
+paskeApi.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerDock, {
+    customCss: '.swagger-ui .renderedMarkdown pre code { background-color: #333333; color: #f8f4f2; }'
+}))
 
 const serverInit = await initializeServer()
 console.log(serverInit)

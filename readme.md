@@ -165,6 +165,6 @@ This project is licensed under the MIT License.
     border-radius: 10px;
   }
   pre code {
-    color: #f8f4f2
+    color: #f8f4f2;
   }
 </style>

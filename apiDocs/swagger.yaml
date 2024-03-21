@@ -8,7 +8,31 @@ servers:
 paths:
   /new_group:
     get:
-      description: "Post your group_name, and recieve an api key, the api key also works as your timer."
+      description: |
+        Post your group_name, and recieve an api key,
+        the api key also works as your timer.
+
+        Example requests for posting: 
+
+        ```bash
+        curl -X GET 'https://paaskeapi.onrender.com/new_group' -H 'group_name: your group_name here'
+        ```
+        
+        Example using Node.js
+        
+        ```javascript
+        
+        const response = await fetch('https://paaskeapi.onrender.com/new_group', {
+          method: 'GET',
+          headers: {
+            group_name: 'your group_name here'
+            }
+          }
+          const result = await response.json()
+          console.log(result)
+        )
+        ```
+
       parameters:
         - name: group_name
           in: header
@@ -62,7 +86,28 @@ paths:
                       - message
   /question:
     get:
-      description: "Get the current question for your group"
+      description: |
+        Get the current question for your group
+        Example requests for posting: 
+
+        ```bash
+        curl -X GET 'https://paaskeapi.onrender.com/api_key' -H 'api_key: your api_key here'
+        ```
+        
+        Example using Node.js
+        
+        ```javascript
+        
+        const response = await fetch('https://paaskeapi.onrender.com/question', {
+          method: 'GET',
+          headers: {
+            api_key: 'your api_key here'
+            }
+          }
+          const result = await response.json()
+          console.log(result)
+        )
+        ```
       parameters:
         - name: api_key
           in: header
@@ -115,7 +160,37 @@ paths:
                     required:
                       - message
     post:
-      description: Posts an Answer to a served question, remember to set "Content-Type" in header!
+      description: |
+        Posts an Answer to a served question, remember to set "Content-Type" in header!
+
+        Example requests for posting: 
+
+        ```bash
+        curl -X POST 'https://paaskeapi.onrender.com/question' \
+        -H 'api_key: your api_key here' \
+        -H 'Content-Type: application/json' \
+        -d '{"question_id": 42, "answer": "everything"}'
+        ```
+        
+        Example using Node.js
+        
+        ```javascript
+        
+        const response = await fetch('https://paaskeapi.onrender.com/question', {
+          method: 'POST',
+          headers: {
+              api_key: 'your api_key here',
+              'Content-Type': 'application/json'
+              },
+          body: JSON.stringify({
+              question_id: 42,
+              answer: 'everything'
+            })
+          }
+          const result = response.json()
+          console.log(result)
+        )
+        ```
       parameters:
         - name: api_key
           in: header
