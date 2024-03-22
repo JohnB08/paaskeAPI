@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { createNewUser, validateUserToken } from "./userfuncs/createUser.js";
-import { validateBodyasObject, validateTokenAsString } from "./userfuncs/tokenValidation.js";
+import { validateBodyasObject, validateTokenAsString, validateUsernameAsString } from "./userfuncs/tokenValidation.js";
 import { getAnswer, getNextQuestion, getUserID, initializeServer } from "./pgFuncs/dbfuncs.js";
 import swaggerUi from "swagger-ui-express";
 import markdownit from "markdown-it";
@@ -56,7 +56,8 @@ paskeApi.get("/readme", (req, res) => {
 /* Tries to post a new group to the postgres database */
 paskeApi.get("/new_group", async (req, res) => {
     const username = req.headers.group_name;
-    if (!username) {
+    const usernameValidation = validateUsernameAsString(username);
+    if (!usernameValidation) {
         return res.status(404).json({
             error: {
                 message: "Missing Groupname"

@@ -12,7 +12,8 @@ export const validateTokenAsString = (token) => {
  * @returns boolean
  */
 export const validateUsernameAsString = (username) => {
-    return (typeof username === "string");
+    return (typeof username === "string" &&
+        username.length > 0);
 };
 /**
  * a function that validates the request body as the correct body type.

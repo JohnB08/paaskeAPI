@@ -17,9 +17,10 @@ export const validateTokenAsString = (token: string|string[]|undefined): token i
  * @param username the provided username
  * @returns boolean
  */
-export const validateUsernameAsString = (username: string | undefined): username is string =>{
+export const validateUsernameAsString = (username: string |string[]| undefined): username is string =>{
     return (
-        typeof username === "string"
+        typeof username === "string" &&
+        username.length > 0
     )
 }
 
