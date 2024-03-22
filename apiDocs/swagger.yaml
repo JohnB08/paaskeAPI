@@ -95,7 +95,7 @@ paths:
         Example requests for posting: 
 
         ```bash
-        curl -X GET 'https://paaskeapi.onrender.com/api_key' -H 'api_key: your api_key here'
+        curl -X GET 'https://paaskeapi.onrender.com/question' -H 'api_key: your api_key here'
         ```
         
         Example using Node.js
