@@ -2,7 +2,11 @@ openapi: 3.0.0
 info:
   version: 1.0.0
   title: Kodehode påskelAPIrinten 2024
-  description: "Welcome to this years påskelAPIrint, this is a quiz that follows the traditions of other påskelabyrinter, in that you will be served a selection of question. All of which have a hidden common denominator."
+  description: |
+    Welcome to this years påskelAPIrint, this is a quiz that follows the traditions of other påskelabyrinter. 
+    Your group will be served a selection of questions, all of which have a hidden common denominator.
+    It is your job to answer the questions, and puzzle out the common demoninator at the end. 
+
 servers:
   - url: https://paaskeapi.onrender.com/
 paths:
@@ -115,22 +119,37 @@ paths:
             type: string
       responses:
         '200':
-          description: OK
+          description: Renders a response deppending on if the group has completed their questionloop. Check the schema tab for both examples.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  success: 
+                oneOf:
+                  - description: When there are still questions left to answer.
                     type: object
                     properties:
-                      question:
-                        type: string
-                      question_id:
-                        type: number
-                    required:
-                      - question
-                      - question_id
+                      success: 
+                        type: object
+                        properties:
+                          message:
+                            type: string
+                          question_id:
+                            type: integer
+                          question:
+                            type: string
+                        required:
+                          - message
+                          - question_id
+                          - question
+                  - description: When you are done with the question loop.
+                    type: object
+                    properties:
+                      success: 
+                        type: object
+                        properties:
+                          message:
+                            type: string
+                        required:
+                          - message
         '401':
           description: Unauthorized
           content:
@@ -213,7 +232,37 @@ paths:
                 - answer
       responses:
         '200':
-          description: OK
+          description: Renders a response deppending on if the group has completed their questionloop. Check the schema tab for both examples.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - description: When there are still questions left to answer.
+                    type: object
+                    properties:
+                      success: 
+                        type: object
+                        properties:
+                          message:
+                            type: string
+                          question_id:
+                            type: integer
+                          question:
+                            type: string
+                        required:
+                          - message
+                          - question_id
+                          - question
+                  - description: When you are done with the question loop.
+                    type: object
+                    properties:
+                      success: 
+                        type: object
+                        properties:
+                          message:
+                            type: string
+                        required:
+                          - message
         '401':
           description: Unauthorized
           content:
