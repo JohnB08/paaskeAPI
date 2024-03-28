@@ -172,8 +172,8 @@ paskeApi.post("/question", async (req, res) => {
         });
     }
     const userID = fetchedUserID.data;
-    const { questionId, answer } = body;
-    const checkAnswer = await getAnswer(userID, answer.toLowerCase(), questionId);
+    const { question_id, answer } = body;
+    const checkAnswer = await getAnswer(userID, answer.toLowerCase(), question_id);
     if (!checkAnswer.success || typeof checkAnswer.answer === "undefined") {
         return res.status(500).json({
             error: {

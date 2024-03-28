@@ -23,5 +23,5 @@ export const validateUsernameAsString = (username) => {
 export const validateBodyasObject = (body) => {
     return (typeof body === "object" &&
         typeof body.answer === "string" &&
-        typeof body.questionId === "number");
+        typeof body.question_id === "number");
 };

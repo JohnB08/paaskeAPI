@@ -28,7 +28,7 @@ export const validateUsernameAsString = (username: string |string[]| undefined):
  * the typescript type for the required request.body
  */
 type bodyType = {
-    questionId: number,
+    question_id: number,
     answer: string
 }
 
@@ -41,6 +41,6 @@ export const validateBodyasObject = (body: any): body is bodyType =>{
     return (
         typeof body === "object" &&
         typeof (body as bodyType).answer === "string" &&
-        typeof (body as bodyType).questionId === "number"
+        typeof (body as bodyType).question_id === "number"
     )
 }
